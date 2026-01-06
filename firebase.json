@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "public": "edoc_admin_pannel/dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }]
+  }
+}
