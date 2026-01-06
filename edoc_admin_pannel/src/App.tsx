@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import './styles/admin.css';
 import { initialApps, type AppData } from './data/mockApps';
 import { initialUsers, type User } from './data/mockUsers';
 import AdminDashboard from './pages/AdminDashboard';
 import EDocHub from './pages/eDocHub';
 import EDocHubB2B from './pages/eDocHubB2B';
-import { AuthProvider, useAuth } from './auth/AuthProvider';
+import { AuthProvider } from './auth/AuthProvider';
+import { useAuth } from './auth/useAuth';
 import SignIn from './components/SignIn';
 
 // Helper: generate 6-digit id and 8-char password for B2B credentials

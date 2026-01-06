@@ -1,4 +1,4 @@
-import { User } from '../data/mockUsers';
+import type { User } from '../data/mockUsers';
 
 export function isUserArray(value: unknown): value is User[] {
   if (!Array.isArray(value)) {
