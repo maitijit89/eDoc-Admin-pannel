@@ -1,0 +1,34 @@
+# Node dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+edoc_admin_pannel/dist/
+
+# Vite / cache
+.vite/
+.cache/
+*.cache
+
+# Environment files
+.env
+.env.local
+.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Misc
+coverage/
