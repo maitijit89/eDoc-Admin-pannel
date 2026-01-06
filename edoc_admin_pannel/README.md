@@ -13,6 +13,27 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 ## Expanding the ESLint configuration
 
+## Google OAuth setup 🔒
+
+To enable Google Sign-in for the admin panel, create a Google OAuth Client ID (Web application) and add your deployed origin to the authorized JavaScript origins (for example: `https://edoc-admin-pannel.web.app` and `http://localhost:5173` for local testing).
+
+Set the client ID as a Vite environment variable at build time with `VITE_GOOGLE_CLIENT_ID` (do not commit secrets if you prefer env-based deployments). You can copy `.env.sample` to `.env` and replace the placeholder with your client ID:
+
+```
+cp .env.sample .env
+# edit .env and set VITE_GOOGLE_CLIENT_ID
+```
+
+After setting the variable, rebuild and redeploy:
+
+```
+npm run build
+firebase deploy --only hosting
+```
+
+> Note: The current implementation verifies the ID token client-side for convenience; for production you should verify ID tokens on a trusted backend and issue a session cookie or JWT.
+
+
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
 ```js
