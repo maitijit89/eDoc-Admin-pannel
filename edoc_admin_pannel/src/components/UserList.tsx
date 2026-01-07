@@ -4,7 +4,6 @@ import type { User } from '../data/mockUsers';
 type Props = Readonly<{
   users: User[];
   onToggleTracking: (id: string) => void;
-  onRegenerateB2BCreds?: (id: string) => void;
 }>;
 
 function formatTime(totalSeconds: number) {
@@ -14,7 +13,7 @@ function formatTime(totalSeconds: number) {
   return `${h}h ${m}m ${s}s`;
 }
 
-function UserList({ users, onToggleTracking, onRegenerateB2BCreds }: Props) {
+function UserList({ users, onToggleTracking }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
@@ -61,7 +60,6 @@ function UserList({ users, onToggleTracking, onRegenerateB2BCreds }: Props) {
                       <div>Pass: <strong>{u.b2bPassword && !showMap[u.id] ? '••••••••' : u.b2bPassword ?? '—'}</strong></div>
                       <div>
                         <button className="btn btn-ghost" onClick={() => toggleShow(u.id)}>{showMap[u.id] ? 'Hide' : 'Show'}</button>
-                        {onRegenerateB2BCreds && <button className="btn btn-ghost" onClick={() => onRegenerateB2BCreds(u.id)}>Regenerate</button>}
                       </div>
                     </div>
                   )}
@@ -79,11 +77,11 @@ function UserList({ users, onToggleTracking, onRegenerateB2BCreds }: Props) {
         })}
       </div>
       <div className="pagination">
-        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+        <button className="btn btn-ghost" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </button>
-        <span>Page {currentPage} of {Math.ceil(users.length / itemsPerPage)}</span>
-        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={indexOfLastItem >= users.length}>
+        <span className="muted">Page {currentPage} of {Math.ceil(users.length / itemsPerPage)}</span>
+        <button className="btn btn-ghost" onClick={() => setCurrentPage(currentPage + 1)} disabled={indexOfLastItem >= users.length}>
           Next
         </button>
       </div>

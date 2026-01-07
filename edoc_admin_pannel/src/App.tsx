@@ -87,15 +87,6 @@ function InnerApp() {
     persistUsers([...users, nextUser]);
   }
 
-  function regenerateB2BCreds(userId: string) {
-    const next = users.map((u) => {
-      if (u.id !== userId) return u;
-      const creds = generateB2BCredentials();
-      return { ...u, b2bId: creds.id, b2bPassword: creds.pass };
-    });
-    persistUsers(next);
-  }
-
   function toggleUserTracking(id: string) {
     const next = users.map((u) => {
       if (u.id !== id) return u;
@@ -136,11 +127,11 @@ function InnerApp() {
         )}
 
         {page === 'edoc' && selected && (
-          <EDocHub app={selected} onBack={onBack} onToggleActive={onToggleActive} users={usersForSelected} onAddUser={(data) => addUser('edoc', data)} onToggleUserTracking={toggleUserTracking} onRegenerateB2BCreds={regenerateB2BCreds} />
+          <EDocHub app={selected} onBack={onBack} onToggleActive={onToggleActive} users={usersForSelected} onAddUser={(data) => addUser('edoc', data)} onToggleUserTracking={toggleUserTracking} />
         )}
 
         {page === 'edoc-b2b' && selected && (
-          <EDocHubB2B app={selected} onBack={onBack} onToggleActive={onToggleActive} users={usersForSelected} onAddUser={(data) => addUser('edoc-b2b', data)} onToggleUserTracking={toggleUserTracking} onRegenerateB2BCreds={regenerateB2BCreds} />
+          <EDocHubB2B app={selected} onBack={onBack} onToggleActive={onToggleActive} users={usersForSelected} onAddUser={(data) => addUser('edoc-b2b', data)} onToggleUserTracking={toggleUserTracking} />
         )}
       </main>
 

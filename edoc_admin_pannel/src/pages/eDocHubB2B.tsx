@@ -11,10 +11,9 @@ type Props = Readonly<{
   users: User[];
   onAddUser: (data: { name: string; ageGroup: User['ageGroup']; gender: User['gender']; location: string; authProvider: User['authProvider']; phone?: string }) => void;
   onToggleUserTracking: (id: string) => void;
-  onRegenerateB2BCreds?: (id: string) => void;
 }>;
 
-function EDocHubB2B({ app, onBack, onToggleActive, users, onAddUser, onToggleUserTracking, onRegenerateB2BCreds }: Props) {
+function EDocHubB2B({ app, onBack, onToggleActive, users, onAddUser, onToggleUserTracking }: Props) {
   return (
     <div className="page app-page">
       <button className="btn btn-ghost" onClick={onBack}>&larr; Back</button>
@@ -30,7 +29,7 @@ function EDocHubB2B({ app, onBack, onToggleActive, users, onAddUser, onToggleUse
 
       <div className="panel user-area">
         <UserForm onAdd={onAddUser} allowedAuthProviders={['b2b']} />
-        <UserList users={users} onToggleTracking={onToggleUserTracking} onRegenerateB2BCreds={onRegenerateB2BCreds} />
+        <UserList users={users} onToggleTracking={onToggleUserTracking} />
       </div>
 
       <div className="panel">
