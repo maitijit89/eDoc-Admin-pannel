@@ -1,33 +1,26 @@
 import { memo, useState } from 'react';
-import type { AgeGroup, Gender, AuthProvider } from '../data/mockUsers';
+import type { AgeGroup, Gender } from '../data/mockUsers';
 
 type Props = Readonly<{
-  onAdd: (data: { name: string; ageGroup: AgeGroup; gender: Gender; location: string; authProvider: AuthProvider; phone?: string }) => void;
-  allowedAuthProviders?: AuthProvider[];
+  onAdd: (data: { name: string; ageGroup: AgeGroup; gender: Gender; location: string; }) => void;
 }>;
 
 const ageGroups: AgeGroup[] = ['under18', '18-24', '25-34', '35-44', '45-54', '55+'];
 const genders: Gender[] = ['male', 'female', 'non-binary', 'prefer-not-to-say'];
-function UserForm({ onAdd, allowedAuthProviders }: Props) {
-  const authOptions: AuthProvider[] = allowedAuthProviders?.length ? allowedAuthProviders : ['google', 'phone'];
-
+function UserForm({ onAdd }: Props) {
   const [name, setName] = useState('');
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('25-34');
   const [gender, setGender] = useState<Gender>('prefer-not-to-say');
   const [location, setLocation] = useState('');
-  const [authProvider, setAuthProvider] = useState<AuthProvider>(authOptions[0]);
-  const [phone, setPhone] = useState('');
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
-    onAdd({ name: name.trim(), ageGroup, gender, location: location.trim(), authProvider, phone: authProvider === 'phone' ? phone.trim() : undefined });
+    onAdd({ name: name.trim(), ageGroup, gender, location: location.trim() });
     setName('');
     setLocation('');
     setAgeGroup('25-34');
     setGender('prefer-not-to-say');
-    setAuthProvider(authOptions[0]);
-    setPhone('');
   }
 
   return (
@@ -52,18 +45,6 @@ function UserForm({ onAdd, allowedAuthProviders }: Props) {
             </option>
           ))}
         </select>
-      </div>
-
-      <div className="form-row">
-        <label className="muted label-login" htmlFor="authProvider">Login</label>
-        <select id="authProvider" aria-label="Login method" value={String(authProvider)} onChange={(e) => setAuthProvider(e.target.value as typeof authOptions[number])}>
-          {authOptions.map((a) => (
-            <option key={a} value={a}>{a}</option>
-          ))}
-        </select>
-        {authProvider === 'phone' && (
-          <input aria-label="Phone number" placeholder="Phone (e.g. +1...)" value={phone} onChange={(e) => setPhone(e.target.value)} />
-        )}
       </div>
 
       <div className="form-row">
